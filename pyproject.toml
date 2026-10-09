@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling>=1.18"]
+build-backend = "hatchling.build"
+
+[project]
+name = "openflow"
+version = "0.1.0"
+description = "Thin Python SDK and CLI for openflowmcp.com — LLM chat (OpenAI/Anthropic/Gemini-compatible), image/video/voice generation, Google account routing."
+readme = "README.md"
+license = {text = "MIT"}
+authors = [{name = "Maksim Tkachuk", email = "molkex@icloud.com"}]
+requires-python = ">=3.10"
+keywords = ["openflow", "llm", "anthropic", "openai", "gemini", "flow", "veo", "proxy"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = ["httpx>=0.27"]
+
+[project.optional-dependencies]
+rich = ["rich>=13"]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "respx>=0.21", "rich>=13"]
+
+[project.scripts]
+openflow = "openflow.cli:main"
+
+[project.urls]
+Homepage = "https://openflowmcp.com"
+Source = "https://github.com/molkex/openflow-sdk-py"
+Issues = "https://github.com/molkex/openflow-sdk-py/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["openflow"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
