@@ -119,6 +119,32 @@ except OpenFlowError:  # everything else
     ...
 ```
 
+## Branded CLI wrappers
+
+Installing this package also installs thin wrappers around popular coding CLIs
+that route through openFlow — zero mention of the upstream provider:
+
+```bash
+export OPENFLOW_API_KEY=fk_...
+
+openflow-code "fix the bug in main.py"   # Claude Code CLI via openFlow
+openflow-aider path/to/file              # aider via openFlow
+openflow-codex "..."                     # OpenAI Codex CLI via openFlow
+openflow-cursor                          # writes ~/.cursor/mcp.json
+```
+
+Each wrapper reads `OPENFLOW_API_KEY`, maps it to the standard provider env
+var (`ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, …), points the base URL at
+`https://openflowmcp.com/llm`, and `exec()`s the real CLI.
+
+If you already have the upstream SDK installed and want to skip ours:
+
+```bash
+export ANTHROPIC_API_KEY="fk_your_openflow_key"
+export ANTHROPIC_BASE_URL="https://openflowmcp.com/llm"
+claude "..."
+```
+
 ## License
 
 MIT.
